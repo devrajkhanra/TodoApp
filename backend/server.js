@@ -1,6 +1,7 @@
 // Server
 
 const express = require('express');
+const compression = require('compression')
 const dotenv = require('dotenv').config({path: './.env'})
 const sequelize = require('./config/db');
 const bodyParser = require('body-parser');
@@ -8,9 +9,10 @@ const authRoutes = require('./routes/authRoutes');
 
 // Create an App
 const app = express();
-const PORT = 3001;
+const port = process.env.NODE_ENV || process.env.PORT;
 
 // Middleware
+app.use(compression())
 app.use(bodyParser.json());
 
 // Routes
@@ -23,8 +25,8 @@ sequelize
     console.log('Database Connection: Successfull');
     
     // Listen to PORT.
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
+    app.listen(port, () => {
+        console.log(`Server is running on http://localhost:${port}`);
     });
 }).catch((error) => {
     throw new Error(error)
