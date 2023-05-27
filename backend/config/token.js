@@ -21,9 +21,15 @@ const verifyAccessToken = (token) => {
   return jwt.verify(token, secretKey);
 };
 
+// Verify the access token
+const verifyRefreshToken = (token) => {
+  return jwt.verify(token, secretKey);
+};
+
 
 module.exports = {
   generateAccessToken,
   generateRefreshToken,
   verifyAccessToken,
+  verifyRefreshToken
 };

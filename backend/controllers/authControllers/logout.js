@@ -3,16 +3,19 @@ const Token = require('../../models/Token')
 const logout = async (req, res) => {
 
     try {
-        const accessToken = req.body.accessToken;
+        const refreshToken = req.body.refreshToken;
 
         // Delete the refresh token from the database
-        await Token.destroy({ where: { token: accessToken } });
+        const destroyToken= await Token.destroy({ where: { refreshToken: refreshToken } });
+        if(!destroyToken){
+            return res.status(400).json({message:'Failed to logout'})
+        }
 
-        res.json({ message: 'Logout successful' });
+        return res.status(200).json({ message: 'Logout successful' });
     }
 
     catch (error) {
-        throw new Error(error);
+        return res.status(500).json({ error });
     }
 }
 
