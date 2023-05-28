@@ -2,7 +2,7 @@ const { Token } = require('../models/Token');
 const {verifyAccessToken, verifyRefreshToken, generateAccessToken} = require('../config/token')
 
 const authenticate = async (req, res, next) => {
-  console.log(req.headers);
+  // console.log(req.headers);
   const accessToken = req.headers.accesstoken;
   const refreshToken = req.headers.refreshtoken;
 
