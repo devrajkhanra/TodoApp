@@ -1,6 +1,7 @@
 // Server
 
 const express = require('express');
+const cors = require('cors');
 const compression = require('compression')
 const dotenv = require('dotenv').config({path: './.env'})
 const sequelize = require('./config/db');
@@ -10,6 +11,9 @@ const authRoutes = require('./routes/authRoutes');
 // Create an App
 const app = express();
 const port = process.env.NODE_ENV || process.env.PORT;
+
+// Enable CORS
+app.use(cors());
 
 // Middleware
 app.use(compression())

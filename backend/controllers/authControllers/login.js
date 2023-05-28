@@ -7,6 +7,7 @@ const {
 } = require("../../config/token");
 
 const login = async (req, res) => {
+  console.log(req);
   const { email, password } = req.body;
 
   try {
@@ -26,11 +27,15 @@ const login = async (req, res) => {
     // Generate Tokens
     const accessToken = generateAccessToken(existingUser.id);
     const refreshToken = generateRefreshToken(existingUser.id);
+    const accessTokenExp = new Date(Date.now() + 15 * 60 * 1000);
+    const refreshTokenExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
     // Store the refresh token in the database
     const storeToken = await Token.create({
       accessToken: accessToken,
       refreshToken: refreshToken,
+      accessTokenExp: accessTokenExp,
+      refreshTokenExp: refreshTokenExp,
     });
 
     if (!storeToken) {
@@ -39,12 +44,20 @@ const login = async (req, res) => {
 
     return res.status(200).json({
       message: "User logged in successfully",
-      accessToken: accessToken,
-      refreshToken: refreshToken
+      user: {
+        id: existingUser.id,
+        firstName: existingUser.firstName,
+        lastName: existingUser.lastName,
+        email: existingUser.email,
+        phone: existingUser.phone,
+      },
+      tokens: {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+      },
     });
-    
   } catch (error) {
-    return res.status(500).json({ error });
+    return res.status(500).json({ error: error });
   }
 };
 

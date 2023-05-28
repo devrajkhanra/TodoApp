@@ -11,6 +11,14 @@ const Token = sequelize.define('Token', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  accessTokenExp: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  refreshTokenExp: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  }
 });
 
 module.exports = Token;

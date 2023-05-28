@@ -1,9 +1,9 @@
 const Token = require('../../models/Token')
 
 const logout = async (req, res) => {
-
+    console.log(req);
     try {
-        const refreshToken = req.body.refreshToken;
+        const {refreshToken} = req.body;
 
         // Delete the refresh token from the database
         const destroyToken= await Token.destroy({ where: { refreshToken: refreshToken } });
