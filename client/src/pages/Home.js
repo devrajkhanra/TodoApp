@@ -1,9 +1,12 @@
 
-import { useSelector } from "react-redux";
 import Logout from "../components/User/Logout";
+import { Box, Grid,  } from "@mui/material"; 
+import LeftSidebar from "../components/Layout/LeftSidebar";
+import Middlebar from "../components/Layout/Middlebar";
+import RightSidebar from "../components/Layout/RightSidebar";
 
 const Home = () => {
-  const user = useSelector((state) => state.auth.user);
+  
 
   // useEffect(() => {
   //   const getUserDetails = async () => {
@@ -21,17 +24,34 @@ const Home = () => {
   //   }
   // }, [user, dispatch]);
 
-  const handleUpdate = () => {
-    // Update logic goes here
-  };
+  // const handleUpdate = () => {
+  //   // Update logic goes here
+  // };
 
   return (
-    <div>
-      {user ? <h2>Hello, {user.firstName}</h2> : <h2>Hello, User</h2>}
+    <>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={3} height='100vh'>
+        
+        <Grid item xs={3} borderRight={1} padding={2}>
+        <LeftSidebar/>
+        </Grid>
+        
+        <Grid item xs={6} borderRight={1}>
+          <Middlebar/>
+        </Grid>
+        
+        <Grid item xs={3}>
+        <RightSidebar/>
+        </Grid>
+      
+      </Grid>
+    </Box>
+      
 
-      <button onClick={handleUpdate}>Update</button>
-      <Logout />
-    </div>
+      
+      
+    </>
   );
 };
 

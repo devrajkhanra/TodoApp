@@ -3,6 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { clearTokens, clearUser } from "../../feature/authSlice";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const Logout = () => {
   
@@ -39,10 +40,9 @@ const Logout = () => {
   };
 
   return (
-    <div>
-      <h2>Logout</h2>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <>
+      <Button variant="outlined" onClick={handleLogout}>Logout</Button>
+    </>
   );
 };
 
