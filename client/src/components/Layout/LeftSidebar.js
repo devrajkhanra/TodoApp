@@ -1,16 +1,9 @@
 import {
   Box,
-  Button,
-  Checkbox,
   Divider,
-  FormControlLabel,
-  Grid,
   IconButton,
-  Input,
   InputBase,
-  Link,
   Paper,
-  TextField,
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
@@ -18,14 +11,13 @@ import AddIcon from '@mui/icons-material/Add';
 
 const LeftSidebar = () => {
   return (
-    <>
+    
       <Box
-        component="form"
-        onSubmit=""
         noValidate
         sx={{ mt: 1 }}
         flex
         flexDirection="row"
+        // boxShadow={"none"}
       >
         <Paper
           component="form"
@@ -34,11 +26,12 @@ const LeftSidebar = () => {
             p: "2px 4px",
             display: "flex",
             alignItems: "center",
+            boxShadow:'none'
             // width: 400,
           }}
         >
           <InputBase
-            sx={{ ml: 1, flex: 1 }}
+            sx={{ ml: 1, flex: 1, borderBottom: 1, borderBottomColor: '#e3e6e4'}}
             placeholder="Add a Todo Group"
             inputProps={{ "aria-label": "search google maps" }}
           />
@@ -55,7 +48,7 @@ const LeftSidebar = () => {
           </IconButton>
         </Paper>
       </Box>
-    </>
+    
   );
 };
 

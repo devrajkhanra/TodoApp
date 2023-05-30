@@ -1,7 +1,7 @@
 const Token = require('../../models/Token')
 
 const logout = async (req, res) => {
-    console.log(req);
+    
     try {
         const {refreshToken} = req.body;
 

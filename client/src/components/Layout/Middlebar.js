@@ -1,21 +1,43 @@
 import { useSelector } from "react-redux";
 import React from "react";
-import { Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 
 const Middlebar = () => {
   const user = useSelector((state) => state.auth.user);
   return (
-    <>
-      {user ? (
-        <Typography component="h1" variant="h5">
-          Hello, {user.firstName}
-        </Typography>
-      ) : (
-        <Typography component="h1" variant="h5">
-          Hello, User
-        </Typography>
-      )}
-    </>
+    <Box noValidate sx={{ mt: 1 }} flex flexDirection="row">
+      <Paper
+        square
+        sx={{
+          p: "2px 4px",
+          display: "flex",
+          alignItems: "baseline",
+          boxShadow: "none",
+          // width: 400,
+          flexDirection: "row",
+        }}
+      >
+        {user ? (
+          <>
+            <Typography variant="subtitle1" color="#666b67" marginTop={1}>
+              Hello,
+            </Typography>
+            <Typography
+              variant="h5"
+              color="#666b67"
+              marginTop={1}
+              marginLeft={1}
+            >
+              {user.firstName}
+            </Typography>
+          </>
+        ) : (
+          <Typography component="h4" variant="h4" color="#666b67" marginTop={1}>
+            Hello, User
+          </Typography>
+        )}
+      </Paper>
+    </Box>
   );
 };
 

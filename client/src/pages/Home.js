@@ -1,11 +1,27 @@
 
-import Logout from "../components/User/Logout";
-import { Box, Grid,  } from "@mui/material"; 
+import { Box, Grid  } from "@mui/material"; 
 import LeftSidebar from "../components/Layout/LeftSidebar";
 import Middlebar from "../components/Layout/Middlebar";
 import RightSidebar from "../components/Layout/RightSidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { clearTokens, clearUser } from "../feature/authSlice";
 
 const Home = () => {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!user){
+      dispatch(clearUser());
+      dispatch(clearTokens());
+
+      navigate('/')
+    }
+    
+  }, [user,navigate, dispatch]);
   
 
   // useEffect(() => {
@@ -29,15 +45,15 @@ const Home = () => {
   // };
 
   return (
-    <>
+    
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3} height='100vh'>
         
-        <Grid item xs={3} borderRight={1} padding={2}>
+        <Grid item xs={3} borderRight={1} padding={2} borderColor='#e3e6e4'>
         <LeftSidebar/>
         </Grid>
         
-        <Grid item xs={6} borderRight={1}>
+        <Grid item xs={6} borderRight={1}borderColor='#e3e6e4'>
           <Middlebar/>
         </Grid>
         
@@ -47,11 +63,6 @@ const Home = () => {
       
       </Grid>
     </Box>
-      
-
-      
-      
-    </>
   );
 };
 
