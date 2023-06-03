@@ -1,6 +1,6 @@
 // models/TodoGroup.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/db');
 const User = require('./User');
 
 const TodoGroup = sequelize.define('TodoGroup', {

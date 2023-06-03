@@ -1,26 +1,28 @@
 // Server
 
 const express = require('express');
+const {logger} = require('./middlewares/logger')
+const errorHandler = require('./middlewares/errorHandler')
 const cors = require('cors');
 const compression = require('compression')
 const dotenv = require('dotenv').config({path: './.env'})
 const sequelize = require('./config/db');
 const bodyParser = require('body-parser');
-const authRoutes = require('./routes/authRoutes');
+
 
 // Create an App
 const app = express();
-const port = process.env.NODE_ENV || process.env.PORT;
-
-// Enable CORS
-app.use(cors());
+const PORT = process.env.PORT || 3001;
 
 // Middleware
+app.use(logger)
+app.use(errorHandler)
+app.use(cors());
 app.use(compression())
+app.use(express.json())
 app.use(bodyParser.json());
 
 // Routes
-app.use('/auth', authRoutes);
 
 // Start the Server
 sequelize
@@ -29,8 +31,8 @@ sequelize
     console.log('Database Connection: Successfull');
     
     // Listen to PORT.
-    app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${port}`);
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
     });
 }).catch((error) => {
     throw new Error(error)
